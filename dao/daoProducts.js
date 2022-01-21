@@ -1,4 +1,3 @@
-const product = require('../models/product')
 const db = require("../util/database");
 
 module.exports = class daoProducts{
@@ -20,18 +19,20 @@ module.exports = class daoProducts{
     }
 
     static addProduct(product){
-        db.query(
+        return db.query(
             'INSERT INTO Product (product_name, product_price, product_description, product_path) VALUES (?, ?, ?, ?)',
             [product.product_name, product.product_price, product.product_description, product.product_path])
     }
 
     static deleteProduct(product_id){
-        db.query('DELETE FROM Product WHERE product_id =?', [product_id]);
+        return db.query('DELETE FROM Product WHERE product_id =?', [product_id]);
+
 
     }
 
-    static editProduct(){
-
+    static editProduct(product){
+        return db.query('UPDATE Product SET product_name =?, product_price =?, product_description =?, product_path =? WHERE product_id =?',
+        [product.product_name, product.product_price, product.product_description, product.product_path, product.product_id])
     }
 }
 
