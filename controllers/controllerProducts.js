@@ -9,8 +9,6 @@ module.exports = class ProductController{
         const products = []
         productDao.getAllProducts()
             .then((result) => {
-
-                // console.log()
                 for (let i = 0; i != result[0].length; i++) {
                     products.push(new Product(
                         result[0][i].product_id,
@@ -22,9 +20,9 @@ module.exports = class ProductController{
                 }
                 return apiResponse.successResponse(products, res);
             })
-            .catch((ignored) => {
-                return ApiResponse.errorResponse(500, 'Failed to retrieve products', res)
-            });
+            // .catch((ignored) => {
+            //     return ApiResponse.errorResponse(500, 'Failed to retrieve products', res)
+            // });
     }
 
 
